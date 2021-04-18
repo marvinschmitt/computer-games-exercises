@@ -1,3 +1,9 @@
+# Daniel Knoll
+# Fakultät für Mathematik und Informatik
+# Angewandte Informatik
+# 3375411
+# Marvin Schmitt
+
 extends Label
 
 var accum = 0
