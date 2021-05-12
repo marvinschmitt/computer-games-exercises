@@ -1,12 +1,16 @@
+# author: Marvin Schmitt
+# coauthor list: Daniel Knoll
+
 extends Area2D
 
-const MOVE_SPEED = 100
+var MOVE_SPEED = 100
 
 var _ball_dir
 var _up
 var _down
 
 onready var _screen_size_y = get_viewport_rect().size.y
+onready var _initial_pos = position
 
 func _ready():
 	var n = name.to_lower()
@@ -18,10 +22,13 @@ func _ready():
 func _process(delta):
 	# Move up and down based on input.
 	var input = Input.get_action_strength(_down) - Input.get_action_strength(_up)
-	position.y = clamp(position.y + input * MOVE_SPEED * delta, 16, _screen_size_y - 16)
+	position.y = clamp(position.y + input * MOVE_SPEED * delta, 16, _screen_size_y - 16 - 100)
 
 
 func _on_area_entered(area):
 	if area.name == "Ball":
 		# Assign new direction.
 		area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized()
+
+func reset():
+	position = _initial_pos

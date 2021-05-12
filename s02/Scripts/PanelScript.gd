@@ -3,10 +3,11 @@
 
 extends Panel
 
-const STATE_COLORS = {"STANDING":Color(0,0,0), "DUCKING":Color(1,0,0), 
-"JUMPING":Color(0,1,0),"DIVING":Color(0,0,1)}
+const STATE_COLORS = {"STANDING":Color(0,0,0, 1), "DUCKING":Color(1,0,0, 1), 
+"JUMPING":Color(0,1,0,1),"DIVING":Color(0,0,1,1)}
 var style = StyleBoxFlat.new()
 var state = 'STANDING'
+
 var old_state = state
 
 onready var panel = get_node(".")

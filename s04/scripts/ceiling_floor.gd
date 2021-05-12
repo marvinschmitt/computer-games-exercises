@@ -1,3 +1,6 @@
+# author: Marvin Schmitt
+# coauthor list: Daniel Knoll
+
 extends Area2D
 
 export var _bounce_direction = 1
