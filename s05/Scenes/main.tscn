@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/main.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "// author list: Daniel Knoll
+// coauthor: Marvin Schmitt
+
+shader_type canvas_item;
+
+uniform float red = 1.0;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	COLOR.r = red;
+	COLOR.g = sin(TIME) * 1.0;
+}
+
+void vertex() {
+	VERTEX.x *= cos(TIME) * 1.0;
+	VERTEX.y *= cos(TIME) * 1.0;
+	VERTEX += vec2(cos(TIME)*100.0, sin(-TIME)*100.0);
+	
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/red = 1.0
+
+[node name="Sprite" type="Sprite"]
+material = SubResource( 2 )
+position = Vector2( 547.301, 285.671 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
