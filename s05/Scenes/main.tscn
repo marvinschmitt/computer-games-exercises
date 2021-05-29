@@ -4,8 +4,8 @@
 [ext_resource path="res://Scripts/main.gd" type="Script" id=2]
 
 [sub_resource type="Shader" id=1]
-code = "// author list: Daniel Knoll
-// coauthor: Marvin Schmitt
+code = "// author list: Marvin Schmitt
+// coauthor: Daniel Knoll
 
 shader_type canvas_item;
 

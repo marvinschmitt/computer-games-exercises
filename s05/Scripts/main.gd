@@ -1,5 +1,5 @@
-# author list: Daniel Knoll
-# coauthor: Marvin Schmitt
+# author list: Marvin Schmitt
+# coauthor: Daniel Knoll
 extends Sprite
 
 func _ready():
