@@ -1,0 +1,125 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Panel.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = -1.0
+margin_top = 1.0
+margin_right = 309.0
+margin_bottom = 179.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_1a_1" type="Label" parent="Panel"]
+margin_left = 12.0
+margin_top = 6.0
+margin_right = 57.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_1a_2" type="Label" parent="Panel"]
+margin_left = 12.0
+margin_top = 19.0
+margin_right = 57.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_1b_1" type="Label" parent="Panel"]
+margin_left = 12.0
+margin_top = 39.0
+margin_right = 57.0
+margin_bottom = 53.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_1b_2" type="Label" parent="Panel"]
+margin_left = 12.0
+margin_top = 51.0
+margin_right = 57.0
+margin_bottom = 65.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_2_1" type="Label" parent="Panel"]
+margin_left = 11.0
+margin_top = 71.0
+margin_right = 56.0
+margin_bottom = 85.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_2_2" type="Label" parent="Panel"]
+margin_left = 11.0
+margin_top = 84.0
+margin_right = 56.0
+margin_bottom = 98.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label6"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_3_1" type="Label" parent="Panel"]
+margin_left = 11.0
+margin_top = 104.0
+margin_right = 56.0
+margin_bottom = 118.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label7"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_3_2" type="Label" parent="Panel"]
+margin_left = 11.0
+margin_top = 117.0
+margin_right = 56.0
+margin_bottom = 131.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label8"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_4_1" type="Label" parent="Panel"]
+margin_left = 11.0
+margin_top = 137.0
+margin_right = 56.0
+margin_bottom = 151.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label9"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_4_2" type="Label" parent="Panel"]
+margin_left = 11.0
+margin_top = 150.0
+margin_right = 56.0
+margin_bottom = 164.0
+rect_pivot_offset = Vector2( 106, 14 )
+text = "Label10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
