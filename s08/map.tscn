@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://tileset.res" type="TileSet" id=1]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://map.gd" type="Script" id=5]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 67.6701, 186.804, 0, 0, 0, 0, 70.1311, 45.2947, 0, 0, 0, 0, 99.6634, 20.0692, 0, 0, 0, 0, 97.8176, 183.727, 0, 0, 0, 0, 127.965, 23.1455, 0, 0, 0, 0, 143.962, 182.497, 0, 0, 0, 0, 169.187, 29.298, 0, 0, 0, 0, 185.799, 177.575, 0, 0, 0, 0, 210.409, 29.9133, 0, 0, 0, 0, 222.099, 156.041, 0, 0, 0, 0, 239.326, 32.9896, 0, 0, 0, 0, 263.321, 132.661, 0, 0, 0, 0, 276.857, 36.6811, 0, 0, 0, 0, 296.545, 130.815, 0, 0, 0, 0, 323.617, 39.7574, 0, 0, 0, 0, 338.383, 136.968, 0, 0, 0, 0, 364.839, 41.6031, 0, 0, 0, 0, 383.296, 152.964, 0, 0, 0, 0, 398.062, 44.6794, 0, 0, 0, 0, 417.751, 189.88, 0, 0, 0, 0, 442.976, 43.4489, 0, 0, 0, 0, 471.278, 186.188, 0, 0, 0, 0, 496.503, 47.1404, 0, 0, 0, 0, 519.883, 183.727, 0, 0, 0, 0, 543.878, 50.2167, 0, 0, 0, 0, 577.102, 96.3609, 0, 0, 0, 0, 588.177, 181.881, 0, 0, 0, 0, 401.754, 184.958, 0, 0, 0, 0, 317.464, 121.586, 0, 0, 0, 0, 206.718, 141.275, 0, 0, 0, 0, 163.65, 183.112, 0, 0, 0, 0, 67.6701, 186.804 )
+}
+
+[node name="Main" type="Node"]
+script = ExtResource( 5 )
+Coin = ExtResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 50, 50 )
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 12, 0, 0, 65536, 0, 0, 65548, 0, 0, 131072, 0, 0, 131084, 0, 0, 196608, 0, 0, 196612, 2, 0, 196613, 1, 0, 196614, 1, 0, 196615, 3, 0, 196620, 0, 0, 262144, 0, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 1, 0, 262153, 1, 0, 262154, 1, 0, 262155, 1, 0, 262156, 0, 0 )
+
+[node name="Score" type="Label" parent="."]
+margin_left = 218.464
+margin_top = 0.308472
+margin_right = 398.464
+margin_bottom = 44.3085
+custom_fonts/font = ExtResource( 3 )
+text = "Score"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="CoinSpawnLocation" type="PathFollow2D" parent="CoinPath"]
+position = Vector2( 67.6701, 186.804 )
+rotation = -1.55341
+
+[node name="Coin" parent="." instance=ExtResource( 4 )]
+position = Vector2( 441.754, 174.733 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 265.791, 55.9883 )
+[connection signal="hit" from="Coin" to="." method="_on_Coin_hit"]

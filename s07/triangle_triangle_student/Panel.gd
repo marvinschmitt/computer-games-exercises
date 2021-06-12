@@ -1,3 +1,6 @@
+# author: marvin schmitt
+# coauthor list: daniel knoll
+
 extends Panel
 
 
