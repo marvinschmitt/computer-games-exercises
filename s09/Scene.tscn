@@ -5,7 +5,13 @@
 [ext_resource path="res://scipt.gd" type="Script" id=3]
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 324.693, 349.234 )
+scale = Vector2( 0.998, 1 )
+z_index = 1
+current = true
+zoom = Vector2( 1.2, 1.2 )
 
 [node name="Panel1" type="Panel" parent="."]
 margin_right = 600.0
@@ -37,27 +43,71 @@ texture = ExtResource( 2 )
 [node name="ball" type="Sprite" parent="."]
 position = Vector2( 0, 250 )
 texture = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="Panel2" type="Panel" parent="."]
+margin_left = 0.707123
 margin_top = 600.0
-margin_right = 600.0
+margin_right = 600.707
 margin_bottom = 700.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LineEdit" type="LineEdit" parent="Panel2"]
-margin_left = 175.433
-margin_top = 41.5305
-margin_right = 233.433
-margin_bottom = 65.5305
-text = "speed"
+[node name="Label" type="Label" parent="Panel2"]
+margin_left = 146.782
+margin_top = 38.1067
+margin_right = 189.782
+margin_bottom = 52.1067
+rect_pivot_offset = Vector2( 20, 7 )
+text = "speed:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="LineEdit2" type="LineEdit" parent="Panel2"]
+[node name="speedEdit" type="LineEdit" parent="Panel2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 396.0
-margin_top = 41.5305
-margin_right = -146.0
-margin_bottom = -34.4695
-text = "mode"
+margin_left = 206.944
+margin_top = 32.4861
+margin_right = -335.056
+margin_bottom = -43.5139
+rect_pivot_offset = Vector2( 29, 12 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Panel2"]
+margin_left = 311.201
+margin_top = 35.5868
+margin_right = 352.201
+margin_bottom = 49.5868
+rect_pivot_offset = Vector2( 20.5, 7 )
+text = "mode:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="modeEdit" type="LineEdit" parent="Panel2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 368.513
+margin_top = 31.541
+margin_right = -173.487
+margin_bottom = -44.459
+rect_pivot_offset = Vector2( 29, 12 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Panel2"]
+margin_left = 308.609
+margin_top = 61.3854
+margin_right = 517.609
+margin_bottom = 92.3854
+text = "mode '0' for default derivatives
+mode '1' for catmull-rom splines"
+[connection signal="text_changed" from="Panel2/speedEdit" to="ball" method="_on_speedEdit_text_changed"]
+[connection signal="text_changed" from="Panel2/modeEdit" to="ball" method="_on_modeEdit_text_changed"]
