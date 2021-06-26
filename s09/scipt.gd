@@ -1,5 +1,5 @@
-# author: Daniel Knoll
-# coauthor list: Marvin Schmitt 
+# author: Marvin Schmitt
+# coauthor list: Daniel Knoll 
 
 extends Sprite
 
