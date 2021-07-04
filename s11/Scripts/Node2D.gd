@@ -33,8 +33,8 @@ func generateParticles(start, end, distance):
 	return p
 
 
-func smoothingKernel(x1, x2, h = 0.13):
-	var sub = x1 - x2
+func smoothingKernel(i, j):
+	var sub = particles[i] - particles[j]
 	var r = abs(sub)
 	var div = r/h
 	
@@ -76,8 +76,12 @@ func densityApproximation(i):
 func flowVelocityApproximation(i):
 	var sum = 0
 	for j in N[i]:
-		var div1 = pressure[i] / (pressure_0 + delta_p[i])
-		var div2 = pressure[j] / (pressure_0 + delta_p[j])
+		var c2 = c0 * c0
+		var pd_i = pressure_0 + delta_p[i]
+		var pd_j = pressure_0 + delta_p[j]
+
+		var div1 = (c2 * delta_p[i]) / (pd_i * pd_i)
+		var div2 = (c2 * delta_p[j]) / (pd_j * pd_j)
 		var kernel = smoothingKernel(i, j)
 		sum += mass[j] * (div1 + div2) * kernel
 	return sum
