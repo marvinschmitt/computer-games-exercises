@@ -1,4 +1,26 @@
+# Author: Marvin Schmitt
+# Coauthor list: Daniel Knoll
+
 extends Node2D
+
+# constants
+var spacing = 0.04
+var h = 0.13
+var c0 = 340
+
+var fluid_density_0 = 1
+var pressure_0 = 10000
+
+var particles = []
+var N = []
+var mass = []
+var fluid_density = []
+var delta_p = []
+var pressure = []
+var flow_velocity = []
+
+var t = 0
+
 
 func generateParticles(start, end, distance):
 	var p = []
@@ -12,11 +34,6 @@ func generateParticles(start, end, distance):
 
 
 func smoothingKernel(x1, x2, h = 0.13):
-	# x1: point 1
-	# x2: point 2
-	# h: smoothing length
-	# returns gradient of kernel
-
 	var sub = x1 - x2
 	var r = abs(sub)
 	var div = r/h
@@ -38,21 +55,56 @@ func smoothingKernel(x1, x2, h = 0.13):
 	### with diff ###
 	var kernel
 	if div >= 0 && div <= 1:
-		kernel = (3 * r * (-4 * h + 3 *  r))/(4 * h * h * h)
+		kernel = (3 * r * (-4 * h + 3 * r))/(4 * h * h * h)
 	elif div >= 1 && div <= 2:
 		sub = -2 * h + r
-		kernel = -(3 * sub * sub)/(4 * h^3)
+		kernel = -(3 * sub * sub)/(4 * h * h * h)
 	else:
 		kernel = 0
 
 	return (sub/r) * kernel
 
 
+func densityApproximation(i):
+	var sum = 0
+	for j in N[i]:
+		var kernel = smoothingKernel(i, j)
+		sum += (mass[j] / (fluid_density_0 + delta_p[j])) * (flow_velocity[i] - flow_velocity[j]) * kernel
+	return (fluid_density_0 + delta_p[i]) * sum
+
+
+func flowVelocityApproximation(i):
+	var sum = 0
+	for j in N[i]:
+		var div1 = pressure[i] / (pressure_0 + delta_p[i])
+		var div2 = pressure[j] / (pressure_0 + delta_p[j])
+		var kernel = smoothingKernel(i, j)
+		sum += mass[j] * (div1 + div2) * kernel
+	return sum
+
+
 func _ready():
-	var particles = generateParticles(-10, 70, 0.04)
+	particles = generateParticles(-10, 70, spacing)
 
-	var particle_mass = 0.04
-	var fluid_density_0 = 1
-	var pressure_0 = 10000
-	var flow_valocity = 0
+	# generate state vectors
+	for particle in particles:
+		mass.append([0.04])
+		fluid_density.append([1])
+		delta_p.append([0])
+		pressure.append([10000])
+		flow_velocity.append([0])
 
+	# generate N for each particle
+	for i in range(particles.size()):
+		N.append([])
+		for j in range(particles.size()):
+			if particles[j] >= particles[i] - h && particles[j] <= particles[i] + h:
+				N[i].append(j)
+
+
+func _process(delta):
+	while t < 2:
+		for i in range(particles.size()):
+			densityApproximation(i)
+
+		t += delta
