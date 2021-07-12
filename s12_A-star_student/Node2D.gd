@@ -1,3 +1,7 @@
+# author: daniel knoll
+# coauthor list: marvin schmitt
+
+
 extends Node2D
 
 class Astar:
@@ -97,11 +101,75 @@ class Astar:
 	func printOpenList():
 		for iter in _openList:
 			print(String(iter[0].name) + " " + String(iter[1]))
+		print('')
 	
+
+	func findLowestFScore():
+		var currentStar = self._openList[0]
+		var bestF = currentStar[0].g + currentStar[0].h
+		for i in self._openList.size():
+			var currentF = _openList[i][0].g + _openList[i][0].h
+			if currentF < bestF:
+				bestF = currentF
+				currentStar = _openList[i]
+		_currentNode = currentStar[0]
+		return currentStar[1]
+
+
+	# returns an array with only StarNodes
+	func generateNodeArray(nodes):
+		var newArr = []
+		for n in nodes:
+			newArr.append(n[0])
+		return newArr
+
+
+	func expandNode():
+		var n = _currentNode.neighbors
+		for i in n.size():
+			var closedNodes = generateNodeArray(_closeList)
+			if (closedNodes.find(n[i][0]) >= 0):
+				continue
+			
+			var tentative_g = _currentNode.g + n[i][1]
+			
+			print('CHECK', _openList.find(n[i]))
+			if _openList.find(n[i]) >= 0 && tentative_g >= n[i][0].g:
+				continue
+
+			n[i][0].lastNode = _currentNode
+			n[i][0].g = tentative_g
+
+			var f = tentative_g + n[i][0].h
+
+			# print('n i ', n[i], _openList)
+			var nIdx = _openList.find(n[i])
+			if nIdx >= 0:
+				_openList[nIdx][1] = f
+			else:
+				n[i][1] = f
+				_openList.append(n[i])
+
+
 	func computePath() -> bool:
-		# Enter your code here. You may add new functions 
+		# Enter your code here. You may add new functions
+		_openList.append([_start, _start.g])
+		printOpenList()
+
+		while _openList.size() > 0:
+			var f = findLowestFScore()
+			_openList.remove(_openList.find([_currentNode, f]))
+
+			if _currentNode == _target:
+				return true
+			
+			_closeList.append([_currentNode, f])
+
+			expandNode()
+			printOpenList()
 		return false
 			
+
 func _ready():
 	# Create a class instance
 	var pathSearch = Astar.new()
